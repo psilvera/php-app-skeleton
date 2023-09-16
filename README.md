@@ -57,10 +57,10 @@ In the <b>.ENV</b> file almost all parameters are configured. Also, you can chan
 * After that execute the next commands inside the /project directory as you need
 * Laravel [ <b>composer create-project laravel/laravel .</b> ]
 * Symfony [ <b>composer create-project symfony/skeleton:"x.x.*" .</b> ] [ after optional <b>composer require webapp</b> ]
-* Symfony CLI is installed [ <b>symfony new . --version="x.x.*" --webapp</b> ]
+* Symfony CLI if is installed [ <b>symfony new . --version="x.x.*" --webapp</b> ]
   
 #
 
 <br/>
 
-$${\Large I \space\space HOPE \space\space THIS \space\space HELPS \space\space YOU. \space\space ENJOY \space\space IT \space !}$$
+$${I \space\space HOPE \space\space THIS \space\space HELPS \space\space YOU. \space\space ENJOY \space\space IT \space !}$$
