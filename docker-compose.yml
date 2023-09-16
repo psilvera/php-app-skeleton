@@ -1,0 +1,64 @@
+version: "3.9"
+
+services:
+
+    nginx-service:
+        image: "${NGINX_DOCKER_HUB_IMAGE_VERSION}"
+        container_name: "${NGINX_CONTAINER_NAME}"
+        restart: always
+        tty: true
+        working_dir: /var/www/html
+        links:
+            - php-service
+        volumes:
+            - "./project:/var/www/html"
+            - "./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf"
+        ports:
+            - "${NGINX_PORT_FOR_HOST}:80"
+
+    php-service:
+        image: "${PHP_IMAGE_AND_TAG_NAME}"
+        container_name: "${PHP_CONTAINER_NAME}"
+        build: 
+            dockerfile: "./docker/php-fpm/Dockerfile"
+            args:
+                "PHP_IMAGE_VERSION": "${PHP_DOCKER_HUB_IMAGE_VERSION}"
+                "USER_FOR_CONTAINER": "${PHP_USER_FOR_CONTAINER}"
+                "INSTALL_NODE": ${PHP_INSTALL_NODEJS}
+                "NODE_VERSION": ${PHP_NODEJS_VERSION}
+                "INSTALL_SYMFONY_CLI": ${PHP_INSTALL_SYMFONY_CLI}
+                "USER_CONTAINER": ${PHP_USER_FOR_CONTAINER}
+                "GIT_USER": ${GIT_USER}
+                "GIT_EMAIL": ${GIT_EMAIL}
+                "XDEBUG_VERSION": ${XDEBUG_VERSION}
+        restart: always
+        working_dir: "/var/www/html"
+        tty: true
+        user: "${OS_USER_ID}:${OS_GROUP_ID}"
+        links:
+            - mariadb-service
+        volumes:
+            - "./project:/var/www/html"
+            - "./docker/php-fpm/php-overrides.ini:/usr/local/etc/php/conf.d/php-overrides.ini"
+            - "./docker/php-fpm/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini"
+            - "./xdebug:/var/logs/xdebug"
+        environment:
+            XDEBUG_MODE: "debug"
+
+    mariadb-service:
+        container_name: "${MARIADB_CONTAINER_NAME}"
+        image: "${MARIADB_DOCKER_HUB_IMAGE_VERSION}"
+        restart: always
+        tty: true
+        volumes:
+            - "./mariadb/data:/var/lib/mysql"
+            - "./mariadb/logs:/var/log/mysql"
+            - "./mariadb/conf:/etc/mysql"
+        environment:
+            MARIADB_ROOT_PASSWORD: "${MARIADB_ROOT_PASSWORD}"
+            MARIADB_DATABASE: "${MARIADB_DATABASE}"
+            MARIADB_USER: "${MARIADB_USER}"
+            MARIADB_PASSWORD: "${MARIADB_USER_PASSWORD}"
+        ports:
+            - "${MARIADB_PORT_FOR_HOST}:3306"
+
