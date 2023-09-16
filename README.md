@@ -63,4 +63,4 @@ In the <b>.ENV</b> file almost all parameters are configured. Also, you can chan
 
 <br/>
 
-$${\Large I \space\space HOPE \space\space THIS \space\space HELPS \space\space YOU. \space\space ENJOY \space\space IT \space !}$$
+I HOPE THIS HELPS YOU. ENJOY IT!
