@@ -51,6 +51,15 @@ In the <b>.ENV</b> file almost all parameters are configured. Also, you can chan
 * You just need to execute the command [ <b>docker compose up</b> ] [ optionals <b>-d</b> & <b>--build</b> ]
 
 #
+### Notes & Examples
+
+* You need to delete the directory /project/<b>public</b> before install some framework
+* After that execute the next commands inside the /project directory as you need
+* Laravel [ <b>composer create-project laravel/laravel .</b> ]
+* Symfony [ <b>composer create-project symfony/skeleton:"x.x.*" .</b> ] [ after optional <b>composer require webapp</b> ]
+* Symfony CLI is installed [ <b>symfony new . --version="x.x.*" --webapp</b> ]
+  
+#
 
 <br/>
 
